@@ -1,6 +1,25 @@
-import React from 'react'
-import styles from './styles.module.css'
+import React, { useState } from 'react'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
+const Carrusel = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const nextImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }
+
+  const prevImage = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    )
+  }
+
+  return (
+    <div className='carrusel-container'>
+      <button onClick={prevImage}>Anterior</button>
+      <img src={images[currentIndex]} alt='Carrusel' />
+      <button onClick={nextImage}>Siguiente</button>
+    </div>
+  )
 }
+
+export default Carrusel
